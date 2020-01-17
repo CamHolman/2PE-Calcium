@@ -1,7 +1,12 @@
-pfc
+2-Photon Excitation Microscopy Calcium Imaging Analysis
 ==============================
+## Introduction
+This repository contatins tools for analyzing GCaMP signaling (CaS) aquired with 2-Photon Excitation Microscopy (2PE).
 
-Tools for analyzing and comparing 2PE Ca2+ imaging and pupilometry 
+Specifically, this repo was set up to compare baseline CaS in Prefrontal Cortex (PFC) with pupilometry (see repo: ixianid/pupilometry). Additionally, it contains tools to compare baseline signaling between cortical areas, namely primary visual cortex (V1) and PFC).
+
+
+WIP
 
 Project Organization
 ------------
