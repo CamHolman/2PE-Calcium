@@ -4,6 +4,7 @@ A = length(out.datNames);
 clear bursts burstStats
 
 for jj = 1:A
+    
     frames = out.zSize{jj};
     xSize = out.xSize{jj};
     ySize = out.ySize{jj};
@@ -18,7 +19,8 @@ for jj = 1:A
         xLocs{i} = xSize-xLocs{i};
     end
     
-    curveBW = zeros(length(tLocs),frames);
+    cur
+    veBW = zeros(length(tLocs),frames);
     sizeT = zeros(length(tLocs),frames);
     
     %number of onsets per frame
@@ -215,19 +217,50 @@ for jj = 1:A
     
     disp('___Start baseline___')
     
-    % Baseline number of events by taking the mode of num events    
-    base.numEvts =  mode(numEvts)
     
+    % Baseline Number of Events
+    %       Taking the mode of number of events that != 0. Having the mode
+    %       = to zero will cause problems down the line
+        
+        numEvts_mode =  numEvts(numEvts ~= 0);
+        base.numEvts =  mode(numEvts_mode);
+        
+    % Baseline percEvts
+    %       Taking baseline percEvts based on the frames with mode # of
+    %       events
     
-    disp(base.numEvents)
-    
-    
+        percEvts_mode = percEvts(numEvts == base.numEvts);
+        percEvts_mode_mean = mean(percEvts_mode);
+        base.percEvts = percEvts_mode_mean;
+        
+        
+        %%%%%
+            %{
+            disp('length percEvts')    
+            disp(length(percEvts))
+
+            disp('length(numEvts_mode)')
+            disp(length(numEvts_mode))
+
+            disp('sum(numEvts == base.numEvts)')
+            disp(sum(numEvts == base.numEvts))
+
+            disp('length(percEvts_mode)')
+            disp(length(percEvts_mode))
+
+            disp('percEvents_mode average')
+            disp(mean(percEvts_mode))
+
+            %disp(percEvts_mode)
+
+            %}
+        %%%%%
+        
     
     
     
     %% Detect Bursts
-    
-    
+ 
     for n = 1:numel(xPeaks)
         
         %%%%
@@ -287,50 +320,50 @@ for jj = 1:A
         %plot(percEvts)
         
         %%%
-        %{
-        disp('maxPkTimes')
-        disp(maxPkTimes)
-        
-        disp('xPeaks')
-        disp(xPeaks)
-        
-        disp('maxPkTimes(n)')
-        disp(maxPkTimes(n))
-        
-        
-        disp('win = maxPkTimes(n)-20:1:maxPkTimes(n)+5;')
-        disp(win')
-        
-        disp('class / type of win:')
-        disp(class(win))
-        
-        
-        disp('numEvts(1:10)')
-        disp(numEvts(1:10))
-        
-        
-        disp('numEvts(win)')
-        disp(numEvts(win))
-        
-        disp('max(numEvts)')
-        disp(max(numEvts))
-        %}
+            %{
+            disp('maxPkTimes')
+            disp(maxPkTimes)
+
+            disp('xPeaks')
+            disp(xPeaks)
+
+            disp('maxPkTimes(n)')
+            disp(maxPkTimes(n))
+
+
+            disp('win = maxPkTimes(n)-20:1:maxPkTimes(n)+5;')
+            disp(win')
+
+            disp('class / type of win:')
+            disp(class(win))
+
+
+            disp('numEvts(1:10)')
+            disp(numEvts(1:10))
+
+
+            disp('numEvts(win)')
+            disp(numEvts(win))
+
+            disp('max(numEvts)')
+            disp(max(numEvts))
+            %}
         %%%%%%%%%%%%%%%%
         
         %#############^^^^^^^^
         % Plotting percEvts
-        %{
-        disp('Plotting percEvts')
-              
-        plot(percEvts)
-        
-        hold on
-        
-        scatter (maxPkTimes, xPeaks)
-        
-        hold off
-        
-        %}
+            %{
+            disp('Plotting percEvts')
+
+            plot(percEvts)
+
+            hold on
+
+            scatter (maxPkTimes, xPeaks)
+
+            hold off
+
+            %}
         %#############^^^^^^^^
         
         
@@ -376,39 +409,42 @@ for jj = 1:A
                     Set 
             %}
             
-            disp('_________More than 10%?_______')
-            
-            plot(numEvts) 
-            
-            disp('numEvts')
-            disp(numEvts(1:20)')
-            
-                
-            
-            
-            disp('length of numEvts')
-            disp(length(numEvts))
-            
-            
-            disp('win')
-            disp(win')
-            
-            disp('numEvts(win)')
-            disp(numEvts(win)')
-            
-            
-            disp('sum(numEvts(win) > (max(numEvts)*0.10)) > 0')
-            disp(sum(numEvts(win) > (max(numEvts)*0.10)) > 0)
-            
-            disp('sum(numEvts(win) > (max(numEvts)*0.10))')
-            disp(sum(numEvts(win) > (max(numEvts)*0.10)))
-            
-            disp('sum(numEvts(win))')
-            disp(sum(numEvts(win)))
-            
-            disp('(max(numEvts)*0.10))')
-            disp((max(numEvts)*0.10))
-            
+            % Print checks
+            %{
+                disp('_________More than 10%?_______')
+
+                % plot(numEvts) 
+
+                disp('numEvts')
+                disp(numEvts(1:20)')
+
+
+
+
+                disp('length of numEvts')
+                disp(length(numEvts))
+
+
+                disp('win')
+                disp(win')
+
+                disp('numEvts(win)')
+                disp(numEvts(win)')
+
+
+                disp('sum(numEvts(win) > (max(numEvts)*0.10)) > 0')
+                disp(sum(numEvts(win) > (max(numEvts)*0.10)) > 0)
+
+                disp('sum(numEvts(win) > (max(numEvts)*0.10))')
+                disp(sum(numEvts(win) > (max(numEvts)*0.10)))
+
+                disp('sum(numEvts(win))')
+                disp(sum(numEvts(win)))
+
+                disp('(max(numEvts)*0.10))')
+                disp((max(numEvts)*0.10))
+
+            %}
             %%%%
             
             
@@ -416,9 +452,9 @@ for jj = 1:A
             % Adding clause that if the peak detected by `findpeaks` is not 
             % a certain percentage above baseline then pass to the next
             
-            %if 
+            if 
             
-            %end
+            end
             %%%%########
             
             %%%%%%%%%%%%%%
