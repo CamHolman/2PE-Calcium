@@ -455,14 +455,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
         
         
     
-        
-        
         %% read in optoswitch data
-        
-        % Commenting out the vel data stuff for now as the way shes set up
-        % the dir thing sucks
-        
-        %{
         clear filename
         cd '/path/to/data/'
         
@@ -509,8 +502,6 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
         xlabel('time (sec)')
         set(gca,'FontSize',18)
         axis([0 length(epercEvts) 0 max(velocity)+5])
-        
-        %}
         
 
     end
