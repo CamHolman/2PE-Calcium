@@ -1,6 +1,6 @@
 function mouse = buildMouse(aqDir, datDir, spRes, tRes, eType, outDir)
     %{
-    The purpose of this function is to act as a master to build an mouse
+    The purpose of this function is to act as a master to build a mouse
     structure from AQuA output and velocity data. This differes from buildExperiment 
     in that it is designed to include velocity data recorded on a photoswitch
     
