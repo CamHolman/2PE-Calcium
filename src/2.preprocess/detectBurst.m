@@ -1,22 +1,20 @@
 
-function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
+function [bursts, burstStats] = detectBurst(fts, spRes, tRes)
 
-    
-    
-    A = length(out.datNames);
+    A = length(fts.datNames);
     clear bursts burstStats
 
     for jj = 1:A % For each AQuA video
         %% Frame size and video f length  
-            frames = out.zSize{jj};
-            xSize = out.xSize{jj};
-            ySize = out.ySize{jj};
+            frames = fts.zSize{jj};
+            xSize = fts.xSize{jj};
+            ySize = fts.ySize{jj};
             zSize = frames;
     
         %% Absolute locations of all events
             clear aLocs aLocsB xLocs yLocs tLocs
-            for i = 1:length(out.locAbs{jj})
-                absLocsB = out.locAbs{jj};
+            for i = 1:length(fts.locAbs{jj})
+                absLocsB = fts.locAbs{jj};
                 aLocs = absLocsB{i}; %single event
                 [xLocs{i} yLocs{i} tLocs{i}] = (ind2sub([xSize ySize zSize], aLocs));
                 xLocs{i} = xSize-xLocs{i};
@@ -38,10 +36,10 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
                     curveBW(i,minuT) = 1;
                     k=1;
                     for j =2:length(uT)
-                        if nansum(out.propGrow{jj}{i}(j,:)) == 0
+                        if nansum(fts.propGrow{jj}{i}(j,:)) == 0
                             growthT(i,uT(k)) = 0;
                         else
-                            growthT(i,uT(k)) = nansum(out.propGrow{jj}{i}(j,:));
+                            growthT(i,uT(k)) = nansum(fts.propGrow{jj}{i}(j,:));
                         end
                         k=k+1;
                     end
@@ -65,7 +63,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
         
         %% Percent area with event activity
             clear allEvtLocs uLocs
-            allEvtLocs = cell2mat(out.loc2D{jj}'); %%% extract all event locs
+            allEvtLocs = cell2mat(fts.loc2D{jj}'); %%% extract all event locs
             uLocs = unique(allEvtLocs);
             
             numPix = length(uLocs); %number of pixels where an event occupied
@@ -77,9 +75,9 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
 
                 if ~isempty(uT)
 
-                    if length((out.pixelSizePerFrame{jj}{i}(1:end,1))) == length(uT)
+                    if length((fts.pixelSizePerFrame{jj}{i}(1:end,1))) == length(uT)
                     
-                        sizeT(i,uT) = ((out.pixelSizePerFrame{jj}{i}(1:end,1)) / (spRes^2));
+                        sizeT(i,uT) = ((fts.pixelSizePerFrame{jj}{i}(1:end,1)) / (spRes^2));
                         
                     end
                 end
@@ -177,7 +175,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
             end
         
         %% Collect and plot number of events per second 
-            twindow = 1/tres; % Fames per second
+            twindow = 1/tRes; % Fames per second
             clear enumEvts
             j=1;
             for i=1:twindow:length(burstStats.numEvts{jj})-twindow
@@ -200,7 +198,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
             
         %% area with event activity
             clear allEvtLocs uLocs
-            allEvtLocs = cell2mat(out.loc2D{jj}');
+            allEvtLocs = cell2mat(fts.loc2D{jj}');
             uLocs = unique(allEvtLocs);
             
             numPix = length(uLocs); %number of pixels where an event occupied
@@ -223,7 +221,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
                 C = linspecer(N,'qualitative');
                 subplot(5,1,2)
                 for i = 1:size(bursts{jj},1)
-                    rectangle('Position',[bursts{jj}(i,1)*tres 0 (bursts{jj}(i,2)-bursts{jj}(i,1))*tres 100],'FaceColor',[0.9718 0.5553 0.7741],'EdgeColor','none'); hold on;
+                    rectangle('Position',[bursts{jj}(i,1)*tRes 0 (bursts{jj}(i,2)-bursts{jj}(i,1))*tRes 100],'FaceColor',[0.9718 0.5553 0.7741],'EdgeColor','none'); hold on;
                 end
                 %line(1:length(epercEvts), repmat(thr,length(epercEvts)),'LineStyle',':','Color','r','MarkerSize',10,'LineWidth',2); hold on;
                 plot(epercEvts,'Color','k','LineWidth',3); hold on;
