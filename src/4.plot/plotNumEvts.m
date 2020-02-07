@@ -17,7 +17,7 @@ function fig = plotNumEvts(exp, vidix)
     plot(enumEvts,'Color','k','LineWidth',3);
     xlabel('seconds');
     ylabel('number of event onsets');
-    axis([0 length(enumEvts) 0 max(enumEvts)+25])
+    axis([0 length(enumEvts) 0 max(enumEvts)+2])
     set(gca,'fontsize',18)
     box off
 

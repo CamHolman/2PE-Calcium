@@ -1,4 +1,4 @@
-function fig = plotPercActive(bursts, tRes, vidix)
+function fig = plotPercActive(exp, vidix)
 % Plot percent field of view active per second
 %
 %
@@ -6,9 +6,12 @@ function fig = plotPercActive(bursts, tRes, vidix)
 %
 %
 %
-    % Pull index value
+    % Pull basic data
     jj = vidix;
-    
+    tRes = exp.res.tRes;
+    bursts = exp.burst.bursts;
+    epercEvts = exp.burst.burstStats.spercEvts{jj};
+
     % Set up colors and color spaceing from colorbrewer
     N=9;
     C = linspecer(N,'qualitative');
