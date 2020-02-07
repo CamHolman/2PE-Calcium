@@ -1,4 +1,4 @@
-function mouse = buildMouse((aqDir, datDir, spRes, tRes, outDir))
+function mouse = buildMouse(aqDir, datDir, spRes, tRes, eType, outDir)
     %{
     The purpose of this function is to act as a master to build an mouse
     structure from AQuA output and velocity data. This differes from buildExperiment 
@@ -67,14 +67,13 @@ function mouse = buildMouse((aqDir, datDir, spRes, tRes, outDir))
         
         mouse = buildExperiment(aqDir, datDir, spRes, tRes, outDir)
 
-    %% Find velocity data by finding .paq files
-        %{
-            It might be worthwhile to edit this to find files that end with opto.csv or paq.csv
-        %}
+    %% Extract Ephys data
+        ephys = readEphys(datDir, eType)
+        mouse.ephys = ephys
 
-        % Find all .paq files
-        pp = struct2cell(dir([datDir, '**/*.paq']));
-        A = size(pp,2);
+    %% Calculate Velocity Trace
+        vel = optoToVelocity(ephys)
+        mouse.velocity = vel
 
-    %% Read in all paq data
-    [data, names, units, rate,filename, fposition]=paq2lab
+    
+end 

@@ -81,11 +81,10 @@ function ephys = readEphys(datDir, eType)
                     ephys.opto{kk} = eData{:,col}
                 
                 else 
-                    ephys.other{kk,col} = eData{:,col} % This may cause overwriting issues with multiple LFP lines
-
-                    %%%%%%%%%%%%%%%%%%%%
-                    % Stopping here cmh 200206 
-                    %%%%%%%%%%%%%%%%%%%
+                    %ephys.other{kk,col} = eData{:,col} % This may cause overwriting issues with multiple LFP lines
+                    % seems to be reading the ms lines in here. changin the ix above to 
+                    % make the ordering consistent.. ie. 1x3 vs 3x1 
+                    ephys.other{col,kk} = eData{:,col} 
                 end
                 
 
@@ -97,6 +96,8 @@ function ephys = readEphys(datDir, eType)
 
                 does it matter that the CSVs from Sae with opto begin with ms=0 not ms=1 ... 
                 in detectBursts everything is converted from frames to (1)
+                    - Regarding above the 0 --> 1 issue is resolved automatically by readEphys:
+                    changes index by +1 inherently
 
             %}
 
