@@ -1,8 +1,5 @@
 
 function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
-
-    
-    
     A = length(out.datNames);
     clear bursts burstStats
 
@@ -117,7 +114,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
                         % Window will be 25 frames long
 
                     % Set window to first 25 if peak is close to beginning
-                    if (maxPkTimes(n)-20) <= 0
+                    if (maxPkTimes(n)-20) < 0
                         win = 1:1:25;
                             
                     % Set peak to last 25 if peak is at end
@@ -153,7 +150,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
                     %}
                        
                 % Find inidicies of bursts
-                    sprintf("Burst detected in video %d at frame %d", jj, maxPkTimes(n))
+                    sprintf("Burst detected at frame %d", maxPkTimes(n))
                     
                     % Find indicies for rise and decay calculations
                     ix = find(percEvts<xPeaks(n)*thrVec(1)); % Find i where %FOV is less than threshold (10% of peak)
@@ -215,7 +212,6 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
             
             burstStats.spercEvts{jj} = epercEvts;
             
-            
             %{
                 % Commenting out plots - these should not be within this
                 % function 
@@ -233,10 +229,7 @@ function [bursts, burstStats] = detectBurst(out, spRes, tres, outDir, velDir)
                 set(gca,'fontsize',18)
                 box off
             
-                burstStats.sizes{jj}(i) = out.allSize{jj}(i);
-            %} 
-            
-            
+            burstStats.sizes{jj}(i) = out.allSize{jj}(i);
         
         %% Detect sparkles - Commenting out for now
             %{
