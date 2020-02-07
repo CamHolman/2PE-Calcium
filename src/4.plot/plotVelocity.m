@@ -14,7 +14,7 @@ function fig = plotVelocity(mouse, vidix)
     velocity = mouse.velocity{vidix}
 
 
-    plot(1:length(numbreaks),velocity, 'LineWidth',2,'Color','k')
+    plot(1:length(velocity),velocity, 'LineWidth',2,'Color','k')
     ylabel('wheel velocity')
     xlabel('time (sec)')
     set(gca,'FontSize',18)
