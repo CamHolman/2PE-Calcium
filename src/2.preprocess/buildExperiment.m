@@ -61,11 +61,11 @@ function exp = buildExperiment(aqDir, datDir, spRes, tRes, outDir)
     
     %% Setup basics
         % Add AQuA to path
-        addpath(genpath(aqDir))
+        addpath(genpath(aqDir));
 
     %% Add resolutions to exp struct
-        exp.res.tRes = tRes
-        exp.res.spRes = spRes
+        exp.res.tRes = tRes;
+        exp.res.spRes = spRes;
     
 
     %% Read and add features from AQuA data in all aqua output videos in directory
