@@ -1,11 +1,14 @@
 function fig = plotPercActive(exp, vidix)
 % Plot percent field of view active per second
+%   Inputs:
+%       exp         |   Output of buildExperiment containing data from all
+%                       analyzed videos
 %
+%       vidix       |   Index of video to plot from data within burstStats
 %
-%
-%
-%
-%
+%   Outputs:
+%       fig         |   Return plot handle for further manipulation
+    
     % Pull basic data
     jj = vidix;
     tRes = exp.res.tRes;
