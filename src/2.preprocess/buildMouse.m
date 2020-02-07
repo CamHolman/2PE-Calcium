@@ -75,5 +75,7 @@ function mouse = buildMouse(aqDir, datDir, spRes, tRes, eType, outDir)
         vel = optoToVelocity(ephys)
         mouse.velocity = vel
 
+    %% ADD SAVE OUTPUT TO OUTDIR HERE 
+
     
 end 
