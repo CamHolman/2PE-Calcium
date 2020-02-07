@@ -71,10 +71,13 @@ function ephys = readEphys(datDir, eType)
             % Iterate through columns to assign types
             for col = 1:width(eData)
                 % Check if it is optoswitch data 
-                min(eData{:,col})
-                max(eData{:,col})
-
-                if floor(min(eData{:,col})) == 0 && ceil(max(eData{:,col})) == 4 
+                    %{
+                        Note that the method to check if data is opto data is reliant
+                        upon the data coming in the same way, ie the optoswitch must 
+                        report between 0 and 4 mV. This may need to be updated
+                    %}
+                
+                if round(min(eData{:,col})) == 0 && round(max(eData{:,col})) == 4
                     ephys.opto{kk} = eData{:,col}
                 
                 else 
