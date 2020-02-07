@@ -65,47 +65,8 @@ function pupils = readPupil(datDir)
             
             fprintf('Currently reading in csv file: %s\n',fName0)
             
-            tmp = load(f0);
-            pd = tmp.Pupildata;
-            %pupils{kk}  = pup0
-            
-
-
-            % Iterate through each frame and add that frames
-            % data to the correct org structure, nested in one
-            % cell of a cell array within strucure
-            % The fist order cell referes to a trial
-            % each contained cell referrs to a frame within that 
-            % trial
-            
-            B = length (pd);
-
-            for zz = 1:B
-                cframe = pd{zz};
-                if isfield(cframe, 'rotated_rect')
-                    pupils.rotated_rect{kk}{zz} = cframe.rotated_rect;
-                end
-                
-                if isfield(cframe, 'center')
-                    pupils.center{kk}{zz} = cframe.center;
-                end
-                
-                if isfield(cframe, 'major_r')
-                    pupils.major_r{kk}{zz} = cframe.major_r;
-                end
-
-                if isfield(cframe, 'frame_id')
-                    pupils.frame_id{kk}{zz} = cframe.frame_id;
-                end
-
-                if isfield(cframe, 'frame_intensity')
-                    pupils.frame_intensity{kk}{zz} = cframe.frame_intensity;
-                end
-
-                if isfield(cframe, 'contour')
-                    pupils.contour{kk}{zz} = cframe.contour;
-                end
-            end
+            pup0 = load(f0)
+            pupils{kk}  = pup0
 
         end
         
