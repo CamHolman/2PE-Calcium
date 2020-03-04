@@ -1,15 +1,8 @@
-function fig = plotMouseTrialBursts(mouse, vidix)
+function fig = plotMouseTrialBursts0(mouse, vidix)
     % This is the same as plotMouseTrial including plotNumEvts, plotPercActive, plotVelocity.
     % The difference is that it plots the colored boxes where bursts are detected on all plots
     % easy visualization
     %
-
-            %%%%%%%%%%%%%%%%%%%%%%%%%%
-            %   IMPORTANT NOTE: 
-            %   This version cuts velocity to match lenght of aqua
-            %%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
     %   Inputs:
     %       exp         |   Output of buildMouse containing data from all
     %                       analyzed videos and ephys/opto data
@@ -109,7 +102,7 @@ function fig = plotMouseTrialBursts(mouse, vidix)
             ylabel('Velocity')
             xlabel('time (sec)')
             set(gca,'FontSize',18)
-            axis([0 length(enumEvts) 0 max(velocity)+5])
+            axis([0 length(velocity) 0 max(velocity)+5])
             box off
             
             

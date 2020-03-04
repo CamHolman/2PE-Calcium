@@ -87,7 +87,7 @@ function exp = buildExperiment(aqDir, datDir, spRes, tRes, outDir)
     %% Add sparkle data to exp struct
     
     %% Save exp to file in outDir
-        saveFile = strcat(outDir, 'experimentData.mat')
-        save(saveFile, 'exp')
+%        saveFile = strcat(outDir, 'experimentData.mat')
+%        save(saveFile, 'exp')
 
 end
