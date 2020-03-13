@@ -34,7 +34,8 @@ function pupils = readPupil(datDir)
                                 |   |   > AQuA output folder
                                 ...
     
-                            datDir should refer to 'Mouse' or trial, i.e.:
+                            datDir should refer to 'Mouse', or any collection of one or more
+                            related pupuil trials. i.e.:
                                 '/path/to/mouse/'
         
         Outputs:

@@ -70,4 +70,14 @@ function fig = plotVelocityBouts(plot_handle, velocity, min_bout_duration)
     
     ylim([0, ymax+5])
 
+
+    %%%%%%%%%%%%%%%%% Format %%%%%%%%%%%%%%%%
+    % May take this from copyobj
+
+    hold on;
+    xlabel('time (sec)')
+    ylabel('% FOV')
+    set(gca,'fontsize',18)
+    box off
+
 end

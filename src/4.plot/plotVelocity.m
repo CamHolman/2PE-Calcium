@@ -20,4 +20,4 @@ function fig = plotVelocity(mouse, vidix)
     set(gca,'FontSize',18)
     
     axis([0 length(velocity) 0 max(velocity)+5])
-end
+end 
