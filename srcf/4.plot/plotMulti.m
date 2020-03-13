@@ -42,8 +42,20 @@ function fig = plotMulti(figure_list)
             cur_fig = ff(i_tile);                       % Extract current figure handle
 
             copyobj(allchild(get(cur_fig,'CurrentAxes')), cur_tile);    % Copy object from figure handle into tile
+            
+            %%%
+            if i_tile ~= nrows
+                set(gca, 'XColor', 'none')
+            end
+            
+            set(gca,'FontSize',10)
+            %%%
 
         end
   
+    %% Format
+
+    xlabel('time (sec)')
+    
 
 end
