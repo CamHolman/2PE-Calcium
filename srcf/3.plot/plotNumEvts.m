@@ -1,8 +1,7 @@
-function fig = plotNumEvts(exp, vidix)
+function fig = plotNumEvts(vector_numEvents)
 % Plot number of events per second
 %   Inputs:
-%       exp         |   Output of buildExperiment containing data from all
-%                       analyzed videos
+%       vector_numEvents        |   vector of number of events per second 
 %
 %       vidix       |   Index of video to plot from data within burstStats
 %
@@ -10,7 +9,7 @@ function fig = plotNumEvts(exp, vidix)
 %       fig         |   Return plot handle for further manipulation
     
     % Extract Data 
-    enumEvts = exp.burst.burstStats.snumEvts{vidix};
+    enumEvts = vector_numEvents;
     
     % Plot Figure
     fig = figure();
